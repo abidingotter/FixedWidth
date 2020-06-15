@@ -1,6 +1,6 @@
 # FixedWidth 
 
-[![Build status](https://ci.appveyor.com/api/projects/status/00s0wpj80kb30bnt?svg=true)](https://ci.appveyor.com/project/mscribellito/fixedwidth)
+![Build and Publish](https://github.com/abidingotter/FixedWidth/workflows/Build%20and%20Publish/badge.svg)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Released under a MIT license - https://opensource.org/licenses/MIT
