@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Mscribel.FixedWidth
 {
@@ -45,19 +43,16 @@ namespace Mscribel.FixedWidth
         /// <returns>the T object</returns>
         private object GetObject(TextField field)
         {
-
-            string temp = string.Empty;
-            object value = null;
-
             // Get field text
             int position = ZeroBased == true ? field.Position : field.Position - 1;
+            string stringValue;
             try
             {
-                temp = _currentString.Substring(position, field.Size).Trim(field.Padding);
+                stringValue = _currentString.Substring(position, field.Size).Trim(field.Padding);
             }
             catch (ArgumentOutOfRangeException e)
             {
-                throw new Exception(e.Message, e);
+                throw new Exception($"Error deserialising value for field {field.Member.Name}: {e.Message}", e);
             }
 
             // String to object
@@ -65,20 +60,17 @@ namespace Mscribel.FixedWidth
             {
                 try
                 {
-                    value = field.Formatter.Deserialize(temp);
+                    return field.Formatter.Deserialize(stringValue);
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error occurred while deserializing " + field.Name, e);
+                    throw new Exception($"Error deserialising value for field {field.Member.Name}: {e.Message}", e);
                 }
             }
             else
             {
-                value = Convert.ChangeType(temp, field.GetMemberType());
+                return Convert.ChangeType(stringValue, field.GetMemberType());
             }
-
-            return value;
-
         }
 
         /// <summary>

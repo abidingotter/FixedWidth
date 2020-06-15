@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <IsPackable>false</IsPackable>
+    <UserSecretsId>dda42ccc-af35-4fc5-a7b1-d70b8d9dd627</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
