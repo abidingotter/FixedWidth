@@ -1,0 +1,30 @@
+name: Build and Publish
+ 
+on: [push]
+ 
+jobs:
+  build:
+ 
+    runs-on: windows-latest
+ 
+    steps:
+    - uses: actions/checkout@v1
+      name: Checkout Code
+     
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+     
+    - name: Restore NuGet Packages
+      run: nuget restore FixedWidth.sln
+ 
+    - name: Build and Publish
+      run: msbuild FixedWidth.sln /p:Configuration=Release --no-restore
+ 
+    - name: Publish FixedWidth
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: FixedWidth/FixedWidth.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
